@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+API Stuff:
+
+## API Key (v3 auth)
+144b1957a99645a2d49ec1de7dca24a1
+
+## Example API Request
+https://api.themoviedb.org/3/movie/550?api_key=144b1957a99645a2d49ec1de7dca24a1
+
+## API Read Access Token (v4 auth)
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDRiMTk1N2E5OTY0NWEyZDQ5ZWMxZGU3ZGNhMjRhMSIsInN1YiI6IjVlNWNkNTc0OWI4NjE2MDAxOGZiZGE0ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.n-n3ucjDe0VTZD4klRckL5XJYUKI73YYzRSc52Z-Ll4
