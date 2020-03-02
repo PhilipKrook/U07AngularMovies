@@ -14,7 +14,7 @@ import { MoviesComponent } from './movies/movies.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-  //  NgbModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

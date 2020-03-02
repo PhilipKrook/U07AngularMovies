@@ -1,8 +1,13 @@
+<ul>
 <div *ngFor="let movie of movies">
+    <li>
     <h2>{{movie.title}}</h2>
-
+    </li>
+       Release date: {{movie.release_date}}
     <p>
-        {{movie.overview}}
+       Plot: {{movie.overview}}
     </p>
+    <img src="http://image.tmdb.org/t/p/original/{{movie.poster_path}}">
    <!-- <a href="{{movie.url}}">Read full article</a> -->
 </div>
+</ul>
