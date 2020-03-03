@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Observable, Subject } from 'rxjs';
-
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-//import { Movie } from '../';
+import { MovieService } from '../movie.service';
 import { ApiService } from '../api.service';
+import { Movie } from '../movie';
 
 @Component({
   selector: 'app-movie-search',
-  templateUrl: './movie-search.component.html',
-  styleUrls: [ './movie-search.component.css' ]
+  templateUrl: './search.component.html',
+  styleUrls: [ './search.component.css' ]
 })
 export class MovieSearchComponent implements OnInit {
-  movies$: Observable<[]>;
+  movies$: Observable<Movie[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private movieService: MovieService) {}

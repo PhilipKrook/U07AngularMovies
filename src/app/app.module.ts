@@ -5,13 +5,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/movies.component';
-import { SearchComponent } from './search/search.component';
+import { MovieSearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    SearchComponent
+    MovieSearchComponent
   ],
   imports: [
     BrowserModule,
