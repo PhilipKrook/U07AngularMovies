@@ -1,4 +1,10 @@
 
+
+<div>
+   <label>Movie name:
+      <input #movieTitle />
+    </label>
+</div>
 <ul>
 <div *ngFor="let movie of movies">
     <li>
@@ -8,7 +14,7 @@
     <p>
        Plot: {{movie.overview}}
     </p>
-    <img src="http://image.tmdb.org/t/p/original/{{movie.poster_path}}">
+    <img src="http://image.tmdb.org/t/p/original/{{movie.poster_path}}" height="200">
    <!-- <a href="{{movie.url}}">Read full article</a> -->
 </div>
 </ul>

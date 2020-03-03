@@ -1,28 +1,38 @@
-import { Component, OnInit } from '@angular/core'; 
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+
+import { Observable, Subject } from 'rxjs';
+
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+//import { Movie } from '../';
+import { ApiService } from '../api.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
-  template: `
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      <input name="Movie" ngModel required #movie="ngModel">
-      <input name="Actor" ngModel required #actor="ngModel">
-    </form>
-
-    <p>Movie value: {{ movie.value }}</p>
-    <p>Actor value: {{ actor.value }}</p>
-
-    `,
+  selector: 'app-movie-search',
+  templateUrl: './movie-search.component.html',
+  styleUrls: [ './movie-search.component.css' ]
 })
-export class SearchComponent implements OnInit {
-  onSubmit(f: NgForm) {
-    console.log(f.value);
-    console.log(f.valid);
+export class MovieSearchComponent implements OnInit {
+  movies$: Observable<[]>;
+  private searchTerms = new Subject<string>();
+
+  constructor(private movieService: MovieService) {}
+
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
-  constructor() { }
 
   ngOnInit(): void {
+    this.movies$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.movieService.searchMovies(term)),
+    );
   }
 }

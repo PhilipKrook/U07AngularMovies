@@ -1,11 +1,13 @@
-<form>
-    Movie: <input type="text" ng-model="movie">
-</form>
-<form>
-    Actor: <input type="text" ng-model="actor">
-</form>
-  
-<!--
-  <h1>You entered movie: {{movie}}</h1>
-  <h1>You entered actor: {{actor}}</h1>
--->
+<div id="search-component">
+  <h4><label for="search-box">Movie Search</label></h4>
+
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let movie of movies$ | async" >
+      <a routerLink="/detail/{{movie.id}}">
+        {{movie.title}}
+      </a>
+    </li>
+  </ul>
+</div>
