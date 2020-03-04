@@ -15,4 +15,3 @@ export class ApiService {
     return this.httpClient.get(`${this.apiUrl}movie/popular?${this.apiKeyParam}`);    
   };
 }
-

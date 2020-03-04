@@ -11,7 +11,7 @@ import { MovieService }  from '../movie.service';
   styleUrls: [ './movie-detail.component.css' ]
 })
 export class MovieDetailComponent implements OnInit {
-  @Input() movie: Movie;
+  movie: Movie;
 
   constructor(
     private route: ActivatedRoute,

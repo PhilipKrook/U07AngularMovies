@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Movie } from './movie';
 import { MessageService } from './message.service';
+import { API_KEY } from '../apiKey';
 
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
 
-  private moviesUrl = 'api/movies';  // URL to web api
+  private moviesUrl = 'https://api.themoviedb.org/3/';
+  apiKeyParam = `api_key=${API_KEY}`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -59,7 +61,7 @@ export class MovieService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Movie[]>(`${this.moviesUrl}/?name=${term}`).pipe(
+    return this.http.get<any>(`${this.moviesUrl}search/movie/?query=${term}&${this.apiKeyParam}`).pipe(
       tap(x => x.length ?
          this.log(`found movies matching "${term}"`) :
          this.log(`no movies matching "${term}"`)),
