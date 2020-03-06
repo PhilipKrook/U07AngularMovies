@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie';
-import { MOVIES } from '../mock-movies';
 import { MovieService } from '../movie.service'; // API service ?!
+import { MessageService} from '../message.service';
 
 @Component({
   selector: 'app-movies',
@@ -10,21 +10,24 @@ import { MovieService } from '../movie.service'; // API service ?!
 })
 export class MoviesComponent implements OnInit {
 
-  movies: Movie[];
   selectedMovie: Movie;
+  movies: Movie[];
 
-  constructor(private movieService: MovieService) { }
+
+  constructor(private movieService: MovieService, private messageService: MessageService) { } 
+
+  ngOnInit() {
+    this.getMovies(); // this calls the API function ?!
+  }  
+
+  onSelect(movie: Movie): void {
+    this.selectedMovie = movie;
+    this.messageService.add(`MessageService: Selected movie id=${movie.id}`);
+  }
 
   getMovies(): void { // API stuff here ?!
     this.movieService.getMovies()
     .subscribe(movies => this.movies = movies);
   }
 
-  ngOnInit(): void {
-    this.getMovies(); // this calls the API function ?!
-  }
-
-  onSelect(movie: Movie): void {
-    this.selectedMovie = movie;
-  }
 }

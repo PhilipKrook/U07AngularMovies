@@ -9,9 +9,11 @@ import { MessageService } from './message.service'; // imported the new message 
 })
 export class MovieService {
 
+  constructor(private messageService: MessageService) { }
+
   getMovies(): Observable<Movie[]> {  // API Service ?!
+    this.messageService.add('MovieService: fetched movies!!!');
     return of(MOVIES);
   }
 
-  constructor(private messageService: MessageService) { }
 }
