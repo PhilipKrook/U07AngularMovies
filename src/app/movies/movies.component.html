@@ -1,12 +1,11 @@
-<h2>{{ movie.title | uppercase }} Details</h2>
-<div><span>id: </span>{{ movie.id }}</div>
-<div><span>title: </span>{{ movie.title }}</div>
+<h2>My Movies</h2>
 
-<!-- Not sure if this is needed, it's from the hero example-->
-<!-- Start -->
-<div>
-    <label>title:
-        <input [(ngModel)]="movie.title" placeholder="name"/>
-    </label>
-</div>
-<!-- End -->
+<ul class="movies">
+  <li *ngFor="let movie of movies" 
+    (click)="onSelect(movie)" 
+    [class.selected]="movie === selectedMovie">
+    <span class="badge">{{ movie.id }}</span> {{ movie.title }}
+  </li>
+</ul>
+
+<app-movie-detail [movie]="selectedMovie"></app-movie-detail>
