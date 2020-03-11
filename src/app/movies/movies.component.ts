@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service'; // API service ?!
-import { MessageService} from '../message.service';
 
 @Component({
   selector: 'app-movies',
@@ -9,25 +8,20 @@ import { MessageService} from '../message.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-
-  selectedMovie: Movie;
   movies: Movie[];
 
-
-  constructor(private movieService: MovieService, private messageService: MessageService) { } 
+  constructor(private movieService: MovieService) {} 
 
   ngOnInit() {
     this.getMovies(); // this calls the API function ?!
-  }  
-
-  onSelect(movie: Movie): void {
-    this.selectedMovie = movie;
-    this.messageService.add(`MessageService: Selected movie id=${movie.id}`);
-  }
+    this.movieService.getPopularMovies().subscribe((data)=>{
+    console.log('data', data);
+    this.movies = data['results'];
+  });
+  }    
 
   getMovies(): void { // API stuff here ?!
     this.movieService.getMovies()
     .subscribe(movies => this.movies = movies);
   }
-
 }

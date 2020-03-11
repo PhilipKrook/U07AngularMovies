@@ -1,11 +1,15 @@
 <h2>My Movies</h2>
 
+<div>
+  <label>Movie title:
+    <input #movieTitle />
+  </label>
+</div>
+
 <ul class="movies">
   <li *ngFor="let movie of movies">
-    <a routerLink="/detail/{{ movie.id }}">
-      <span class="badge">{{ movie.id }}</span> {{ movie.title }}
-    </a>
+    <a routerLink="/detail/{{movie.id}}">
+      <span class="badge">{{movie.id}}</span> {{movie.title}}
+    </a>    
   </li>
 </ul>
-
-<app-movie-detail [movie]="selectedMovie"></app-movie-detail>
