@@ -48,6 +48,17 @@
   .grid-pad > [class*='col-']:last-of-type {
     padding-right: 20px;
   }
+  .main {
+    background-color: #cfd8dc;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  .main-search {
+    display: inline-block;
+    background-color: #cfd8dc;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
   @media (max-width: 600px) {
     .module {
       font-size: 10px;

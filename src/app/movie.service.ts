@@ -10,7 +10,8 @@ import { API_KEY } from "../apiKey";
 export class MovieService {
   // 'api/movies'; // URL to web api
   private moviesUrl = "https://api.themoviedb.org/3/";
-  apiKeyParam = `api_key=${API_KEY}`;
+  private apiKeyParam = `api_key=${API_KEY}`;
+  public searchResults: Movie[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -56,18 +57,23 @@ export class MovieService {
   }
 
   /* GET movies which title contains search term */
-  searchMovies(term: string): Observable<Movie[]> {
+  searchMovies(term: string): Observable<any> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Movie[]>(`${this.moviesUrl}search/movie?${this.apiKeyParam}&query=${term}`).pipe(
-      tap(x =>
-        x.length
-          ? this.log(`found movies matching "${term}"`)
-          : this.log(`no movies matching "${term}"`)
+    return this.http.get<any>(`${this.moviesUrl}search/movie?${this.apiKeyParam}&query=${term}`).pipe(
+      tap(response => {
+        if(response.total_results > 0) {
+          this.log(`found movies matching "${term}"`)
+          this.searchResults = response.results
+        } else {
+          this.log(`no movies matching "${term}"`)
+          this.searchResults = [];
+        }
+      }
       ),
-      catchError(this.handleError<Movie[]>("searchMovies", []))
+      catchError(this.handleError<any>("searchMovies", []))
     );
   }
 
