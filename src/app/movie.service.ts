@@ -61,7 +61,7 @@ export class MovieService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Movie[]>(`${this.moviesUrl}/?title=${term}`).pipe(
+    return this.http.get<Movie[]>(`${this.moviesUrl}search/movie?${this.apiKeyParam}&query=${term}`).pipe(
       tap(x =>
         x.length
           ? this.log(`found movies matching "${term}"`)

@@ -1,14 +1,14 @@
 <div *ngIf="movie">
 
-    <h2>{{ movie.title | uppercase }} Details</h2>
-    <div><span>ID: </span>{{ movie.id }}</div>
+    <h2>{{ movie.title | uppercase }}</h2>
+    ID: {{ movie.id }}
+    <div><img src="http://image.tmdb.org/t/p/original/{{movie.poster_path}}" height="200"></div>
   
     <!-- Not sure if this is needed, it's from the hero example-->
     <!-- Start -->
     <div>
-      <label>Title:
-        <input [(ngModel)]="movie.title" placeholder="title" />
-      </label>
+      <span>Plot: </span>
+      {{movie.overview}}
     </div>
     <!-- End -->
     <button (click)="goBack()">go back</button>
