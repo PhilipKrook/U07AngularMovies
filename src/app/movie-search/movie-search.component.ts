@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject } from "rxjs";
 
-import {
-   debounceTime, distinctUntilChanged, switchMap
- } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
-import { Movie } from '../movie';
-import { MovieService } from '../movie.service';
+import { Movie } from "../movie";
+import { MovieService } from "../movie.service";
 
 @Component({
-  selector: 'app-movie-search',
-  templateUrl: './movie-search.component.html',
-  styleUrls: [ './movie-search.component.css' ]
+  selector: "app-movie-search",
+  templateUrl: "./movie-search.component.html",
+  styleUrls: ["./movie-search.component.css"]
 })
 export class MovieSearchComponent implements OnInit {
-  movies$: Observable<Movie[]>;
+  movies$: Observable<any>;
+  results: any[];
   private searchTerms = new Subject<string>();
 
   constructor(private movieService: MovieService) {}
@@ -34,7 +33,11 @@ export class MovieSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.movieService.searchMovies(term)),
+      switchMap((term: string) => this.movieService.searchMovies(term))
     );
+  }
+
+  listMovies() {
+    this.results = this.movieService.searchResults;
   }
 }

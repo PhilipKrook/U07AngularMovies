@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Movie } from "./movie";
-import { Observable, of } from "rxjs"; // workaround for HttpClient.get() ?!
-import { MessageService } from "./message.service"; // imported the new message service
+import { Observable, of } from "rxjs";
+import { MessageService } from "./message.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { API_KEY } from "../apiKey";
 
 @Injectable({ providedIn: "root" })
 export class MovieService {
-  // 'api/movies'; // URL to web api
   private moviesUrl = "https://api.themoviedb.org/3/";
   private apiKeyParam = `api_key=${API_KEY}`;
   public searchResults: Movie[] = [];
@@ -28,9 +27,17 @@ export class MovieService {
 
   // GET movies from the server
   getMovies(): Observable<any> {
-    return this.http.get<any>(`${this.moviesUrl}movie/popular?${this.apiKeyParam}`).pipe(
-      tap(_ => this.log("fetched movies")),
-      catchError(this.handleError<any>("getMovies", {}))
+    return this.http
+      .get<any>(`${this.moviesUrl}movie/popular?${this.apiKeyParam}`)
+      .pipe(
+        tap(_ => this.log("fetched movies")),
+        catchError(this.handleError<any>("getMovies", {}))
+      );
+  }
+
+  getActors(id: number) {
+    return this.http.get(
+      `${this.moviesUrl}movie/${id}/credits?${this.apiKeyParam}`
     );
   }
 
@@ -56,25 +63,40 @@ export class MovieService {
     );
   }
 
+  /** GET person by id. Will 404 if id not found */
+  getPerson(id: number): Observable<any> {
+    const url = `${this.moviesUrl}person/${id}?${this.apiKeyParam}`;
+    return this.http.get<any>(url).pipe(
+      tap(_ => this.log(`fetched person id=${id}`)),
+      catchError(this.handleError<any>(`getPerson id=${id}`))
+    );
+  }
+
   /* GET movies which title contains search term */
   searchMovies(term: string): Observable<any> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<any>(`${this.moviesUrl}search/movie?${this.apiKeyParam}&query=${term}`).pipe(
-      tap(response => {
-        if(response.total_results > 0) {
-          this.log(`found movies matching "${term}"`)
-          this.searchResults = response.results
-        } else {
-          this.log(`no movies matching "${term}"`)
-          this.searchResults = [];
-        }
-      }
-      ),
-      catchError(this.handleError<any>("searchMovies", []))
-    );
+    return this.http
+      .get<any>(
+        `${this.moviesUrl}search/multi?${this.apiKeyParam}&query=${term}`
+      )
+      .pipe(
+        tap(response => {
+          if (response.total_results > 0) {
+            this.log(`found movies matching "${term}"`);
+            this.searchResults = response.results.filter(
+              (item: any) => item.media_type !== "tv"
+            );
+            console.log("results:", this.searchResults);
+          } else {
+            this.log(`no movies matching "${term}"`);
+            this.searchResults = [];
+          }
+        }),
+        catchError(this.handleError<any>("searchMovies", []))
+      );
   }
 
   /** Log a MovieService message with the MessageService */
@@ -84,13 +106,10 @@ export class MovieService {
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error);
 
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
