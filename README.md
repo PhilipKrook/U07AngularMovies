@@ -1,29 +1,26 @@
+## To start ##
+From the console write:
+
+'git clone' 
+'npm install'
+'ng serve -o'
+
 ## 
 
-# AngularU07Movies
+The Dashboard view is the main view on the app, the button Dashboard takes you to the Dashboard
+and the button Movies takes you to a list of current popular movies.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+On the Dashboard the 4 most popular movies are shown with a picture.
+Clicking on one takes you to the details page for that movie.
 
-## Development server
+You can search for movies and actors but typing in the name in the search field.
+When clicking the button List Results you are shown a list of all movies and actors matching your search.
+The items in the search results list in Bold are the actors and the other results are movies.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You can also click on an actor to see more details about that actor.
 
-## Code scaffolding
+On the bottom of the page, there is a log service.
+This service shows a log of what the app is doing when the user uses the app or does a search.
+It can be cleared with the Clear button.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Philip Krook ChasAcademy 2020
