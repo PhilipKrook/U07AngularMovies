@@ -1,7 +1,19 @@
 <div *ngIf="movie">
-  <h2>{{movie.title}} Details</h2>
-  <div><span>id: </span>{{movie.id}}</div>
-  <div>{{movie.title}}
+  <div class="main">
+    <h2>{{ movie.title | uppercase }}</h2>
+    ID: {{ movie.id }}
+    <div>
+      <img
+        src="http://image.tmdb.org/t/p/original{{ movie.poster_path }}"
+        height="400"
+      />
+    </div>
   </div>
-  <button (click)="goBack()">go back</button>
+  <div class="main">
+    <span><strong>Plot: </strong></span>
+    {{ movie.overview }}
+  </div>
+  <div class="main-search">
+    <button (click)="goBack()">Go Back</button>
+  </div>
 </div>

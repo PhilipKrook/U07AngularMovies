@@ -1,0 +1,16 @@
+<div *ngIf="person">
+    <div class="main">
+        <h2>{{ person.name | uppercase }}</h2>
+        ID: {{ person.id }}
+        <div>
+           <img src="http://image.tmdb.org/t/p/original{{person.profile_path}}" height="400" />
+        </div>
+    </div>
+    <div class="main">
+        <span><strong>About: </strong></span>
+        {{ person.biography }}
+    </div>
+    <div class="main-search">
+        <button (click)="goBack()">Go Back</button>
+    </div>
+</div>

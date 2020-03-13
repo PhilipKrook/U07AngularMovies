@@ -31,9 +31,6 @@ speed-measure-plugin*.json
 !.vscode/extensions.json
 .history/*
 
-# don't commit API credentials
-src/apiKey.ts
-
 # misc
 /.sass-cache
 /connect.lock
@@ -43,6 +40,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+
+# don't commit API credentials
+src/apiKey.ts
 
 # System Files
 .DS_Store

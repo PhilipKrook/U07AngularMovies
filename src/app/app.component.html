@@ -1,2 +1,10 @@
-<app-movie-search></app-movie-search>
+<div class="main">
+<h1>{{ title }}</h1>
+<nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/movies">Movies</a>
+</nav>
+</div>
+
 <router-outlet></router-outlet>
+<app-messages></app-messages>

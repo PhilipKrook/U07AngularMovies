@@ -1,5 +1,5 @@
 {
-  "name": "u07",
+  "name": "angular-u07-movies",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -16,12 +16,10 @@
     "@angular/compiler": "~9.0.2",
     "@angular/core": "~9.0.2",
     "@angular/forms": "~9.0.2",
-    "@angular/localize": "^9.0.4",
     "@angular/platform-browser": "~9.0.2",
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
-    "@ng-bootstrap/ng-bootstrap": "^6.0.0",
-    "bootstrap": "^4.4.1",
+    "angular-in-memory-web-api": "^0.9.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -1,0 +1,20 @@
+<div>
+  <h3 class="main">Most Popular Awesome Movies</h3>
+</div>
+<div class="grid grid-pad">
+  <a
+    *ngFor="let movie of movies"
+    class="col-1-4"
+    routerLink="/detail/{{ movie.id }}"
+  >
+    <div>
+      <img
+        src="http://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+        height="200"
+      />
+      <h4>{{ movie.title }}</h4>
+    </div>
+  </a>
+</div>
+
+<app-movie-search class="main-search"></app-movie-search>
